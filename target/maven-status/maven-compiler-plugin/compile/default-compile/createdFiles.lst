@@ -1,0 +1,15 @@
+com\ef\common\DbConnection.class
+com\ef\Parser.class
+com\ef\parse\BlockedIps.class
+com\ef\parse\IpDetails.class
+com\ef\db\bal\DataTransactionsBal.class
+com\ef\enums\ThresholdLevel.class
+com\ef\parse\ProcessIps.class
+com\ef\parse\Duration.class
+com\ef\parse\LogParser.class
+com\ef\xmlsettings\XmlProperties.class
+com\ef\db\bal\balImpl\DataTransactionsBalImpl.class
+com\ef\parse\IpStatistics.class
+com\ef\db\dal\DataTransactionsDal.class
+com\ef\db\dal\dalImpl\DataTransactionsDalImpl.class
+com\ef\db\IpBlocked.class

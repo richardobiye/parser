@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>Set your database and file location</comment>
+    <entry key="databaseUserName">admin</entry>
+    <entry key="databasePassword">admin_123</entry>
+    <entry key="databaseConnection">jdbc:mysql://localhost:9090/blockedips</entry>
+    <entry key="accessLogFilePath">C:\Scripts\access.log</entry>
+</properties>
