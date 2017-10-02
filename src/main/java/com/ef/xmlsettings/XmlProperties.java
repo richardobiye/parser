@@ -1,9 +1,7 @@
 package com.ef.xmlsettings;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +36,7 @@ public class XmlProperties {
     private void getProperties() {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource("settings.xml").getFile());
+            File file = getFile(); //new File(classLoader.getResource("settings.xml").getFile());
             FileInputStream fileInput = new FileInputStream(file);
 
 
@@ -47,16 +45,43 @@ public class XmlProperties {
             fileInput.close();
 
             Enumeration enuKeys = properties.keys();
-            map=new HashMap<>();
+            map = new HashMap<>();
             while (enuKeys.hasMoreElements()) {
                 String key = (String) enuKeys.nextElement();
                 String value = properties.getProperty(key);
-                map.put(key,value);
+                map.put(key, value);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private File getFile() {
+        File file = null;
+        String resource = "/settings.xml";
+        URL res = getClass().getResource(resource);
+        if (res.toString().startsWith("jar:")) {
+            try {
+                InputStream input = getClass().getResourceAsStream(resource);
+                file = File.createTempFile("tempfile", ".tmp");
+                OutputStream out = new FileOutputStream(file);
+                int read;
+                byte[] bytes = new byte[1024];
+                while ((read = input.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
+                file.deleteOnExit();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            file = new File(res.getFile());
+        }
+        if (file != null && !file.exists()) {
+            throw new RuntimeException("Error: File " + file + " not found!");
+        }
+        return file;
     }
 }
